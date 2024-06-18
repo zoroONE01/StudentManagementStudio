@@ -4,19 +4,23 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import vn.edu.ptithcm.studentmangementstudio.core.K;
+import vn.edu.ptithcm.studentmangementstudio.core.helper.DBHelper;
 import vn.edu.ptithcm.studentmangementstudio.core.utils.FxmlUtils;
 
+import java.sql.Connection;
+
 public class Main extends Application {
+    Connection connection;
 
     @Override
     public void init() throws Exception {
         super.init();
-        // TODO: connect to server
+        DBHelper.getInstance().initialize(1430, "sa", "adminadmin");
     }
 
     @Override
     public void stop() throws Exception {
-        // TODO: disconnect from server
+        DBHelper.getInstance().close();
         super.stop();
     }
 
