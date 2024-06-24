@@ -72,9 +72,9 @@ public class DashboardPresenter extends BasePresenter implements Initializable {
     }
 
     private void initializeStudentTable() {
-        tableColumnStudentId.setCellValueFactory(new PropertyValueFactory<>(K.Column.ID));
-        tableColumnLastName.setCellValueFactory(new PropertyValueFactory<>(K.Column.LASTNAME));
-        tableColumnFirstName.setCellValueFactory(new PropertyValueFactory<>(K.Column.FIRSTNAME));
+        tableColumnStudentId.setCellValueFactory(new PropertyValueFactory<>(K.DbFields.ID));
+        tableColumnLastName.setCellValueFactory(new PropertyValueFactory<>(K.DbFields.LASTNAME));
+        tableColumnFirstName.setCellValueFactory(new PropertyValueFactory<>(K.DbFields.FIRSTNAME));
         tableColumnBirth.setCellValueFactory(data -> {
             var value = data.getValue().getBirthString();
             return new SimpleStringProperty(value);
@@ -83,8 +83,8 @@ public class DashboardPresenter extends BasePresenter implements Initializable {
             var value = data.getValue().getGenderString();
             return new SimpleStringProperty(value);
         });
-        tableColumnAddress.setCellValueFactory(new PropertyValueFactory<>(K.Column.ADDRESS));
-        tableColumnClassId.setCellValueFactory(new PropertyValueFactory<>(K.Column.CLASS_ID));
+        tableColumnAddress.setCellValueFactory(new PropertyValueFactory<>(K.DbFields.ADDRESS));
+        tableColumnClassId.setCellValueFactory(new PropertyValueFactory<>(K.DbFields.CLASS_ID));
         tableColumnIsOff.setCellValueFactory(data -> {
             var value = data.getValue().getIsOffString();
             return new SimpleStringProperty(value);
@@ -151,7 +151,7 @@ public class DashboardPresenter extends BasePresenter implements Initializable {
     }
 
     public void buttonDeleteDeleteOnPressed(ActionEvent actionEvent) {
-        var isConfirmed = AppDialog.showAlertDialog(K.Strings.CONFIRM_DELETE);
+        var isConfirmed = AppDialog.showConfirmDialog(K.Strings.CONFIRM_DELETE);
         if (isConfirmed) {
             var selectedItem = tableViewStudent.getSelectionModel().getSelectedItem();
             tableViewStudent.getItems().remove(selectedItem);
@@ -159,9 +159,9 @@ public class DashboardPresenter extends BasePresenter implements Initializable {
     }
 
     public void menuItemLogoutOnSelected(ActionEvent actionEvent) {
-        var isConfirmed = AppDialog.showAlertDialog(K.Strings.CONFIRM_LOGOUT);
+        var isConfirmed = AppDialog.showConfirmDialog(K.Strings.CONFIRM_LOGOUT);
         if (isConfirmed) {
-            AppRouter.goTo(FxUtils.getStageFromNode(menuBar), K.Routes.LOGIN_ADMIN, new Size(400, 360));
+            AppRouter.goTo(FxUtils.getStageFromNode(menuBar), K.Routes.LOGIN, new Size(400, 360));
         }
     }
 }

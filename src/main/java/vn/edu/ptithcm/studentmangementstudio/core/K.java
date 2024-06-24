@@ -2,7 +2,8 @@ package vn.edu.ptithcm.studentmangementstudio.core;
 
 public class K {
 
-    public static class Column {
+
+    public static class DbFields {
         public static final String ID = "id";
         public static final String LASTNAME = "lastname";
         public static final String FIRSTNAME = "firstname";
@@ -11,17 +12,19 @@ public class K {
         public static final String GENDER = "gender";
         public static final String CLASS_ID = "classId";
         public static final String IS_OFF = "isOff";
+        public static final String DEPARTMENT_NAME = "TENKHOA";
+        public static final String SERVER_NAME = "TENSERVER";
+        public static final String STUDENT_ID = "MASV";
+        public static final String TEACHER_ID = "MAGV";
+        public static final String FULL_NAME = "HOTEN";
+        public static final String GROUP_NAME = "TENNHOM";
     }
 
     public static class Routes {
-        static private final String ADMIN = "fxml/admin";
-        static private final String USER = "fxml/user";
-        static public final String LOGIN = USER + "/login-view.fxml";
-        static public final String DASHBOARD = USER + "/dashboard-view.fxml";
-        static public final String LOGIN_ADMIN = ADMIN + "/login-view.fxml";
-        static public final String DASHBOARD_ADMIN = ADMIN + "/dashboard-view.fxml";
-        static public final String CLASSROOM_FORM = ADMIN + "/classroom-form-view.fxml";
-        static public final String STUDENT_FORM = ADMIN + "/student-form-view.fxml";
+        static public final String LOGIN = "fxml/login-view.fxml";
+        static public final String DASHBOARD_ADMIN = "fxml/dashboard-view.fxml";
+        static public final String CLASSROOM_FORM = "fxml/classroom-form-view.fxml";
+        static public final String STUDENT_FORM = "fxml/student-form-view.fxml";
     }
 
     public static class Strings {
@@ -37,6 +40,10 @@ public class K {
         public static final String INACTIVE = "Ngừng hoạt động (Đã nghỉ học)";
         public static final String ALL = "All";
         public static final String ID = "ID";
+        public static final String NOT_FOUND_SQL_SERVER_DRIVER = "Không tìm thấy driver JDBC cho SQL Server.";
+        public static final String NOT_FOUND_USER = "Không tìm thấy người dùng.";
+        public static final String DO_NOT_LEAVE_BLANK = " không được để trống.";
+        public static final String ACCOUNT_OR_PASSWORD_INCORRECT = "Tài Khoản hoặc Mật Khẩu không chính xác.";
     }
 
     public static class Pattern {

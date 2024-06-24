@@ -3,7 +3,6 @@ module vn.edu.ptithcm.studentmangementstudio {
     requires javafx.fxml;
     requires javafx.base;
     requires static lombok;
-//    requires mssql.jdbc;
     requires java.sql;
     requires com.microsoft.sqlserver.jdbc;
 

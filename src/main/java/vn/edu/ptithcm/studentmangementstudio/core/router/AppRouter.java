@@ -36,7 +36,7 @@ public class AppRouter {
         stage.close();
         var root = FxmlUtils.getParentFromView(route);
 
-        var scene = new Scene(root, size.width, size.height);
+        var scene = new Scene(root, size.width(), size.height());
         stage.setScene(scene);
         stage.show();
         AppLogger.log("Navigating to " + route, "AppRouter");
@@ -77,7 +77,7 @@ public class AppRouter {
             var viewController = presenterBuilder.apply(fxmlLoader);
 
             var root = (Parent) fxmlLoader.load();
-            var scene = new Scene(root, size.width, size.height);
+            var scene = new Scene(root, size.width(), size.height());
             stage.setScene(scene);
             stage.show();
             AppLogger.log("Navigating to " + route + " : ", "AppRouter");

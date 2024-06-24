@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ButtonType?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<DialogPane prefWidth="400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="vn.edu.ptithcm.studentmangementstudio.presentation.admin.StudentFormPresenter">
+    <content>
+        <VBox>
+            <GridPane hgap="10.0" vgap="10.0">
+                <columnConstraints>
+                    <ColumnConstraints/>
+                    <ColumnConstraints hgrow="ALWAYS"/>
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                    <RowConstraints/>
+                </rowConstraints>
+                <Label text="Mã Sinh Viên:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <TextField fx:id="textFieldId" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                <Label text="Họ:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <TextField fx:id="textFieldLastname" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                <Label text="Tên:" GridPane.rowIndex="2"/>
+                <TextField fx:id="textFieldFirstname" layoutX="117.0" layoutY="46.0" GridPane.columnIndex="1"
+                           GridPane.rowIndex="2"/>
+                <Label text="ĐỊa Chỉ:" GridPane.rowIndex="3"/>
+                <TextField fx:id="textFieldAddress" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                <Label text="Ngày Sinh:" GridPane.rowIndex="4"/>
+                <DatePicker fx:id="datePickerBirth" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                <Label text="Giới Tính:" GridPane.rowIndex="5"/>
+                <HBox GridPane.columnIndex="1" GridPane.rowIndex="5">
+                    <RadioButton fx:id="radioButtonMale" mnemonicParsing="false" text="Nam"/>
+                    <RadioButton fx:id="radioButtonFemale" layoutX="10.0" layoutY="10.0" mnemonicParsing="false"
+                                 text="Nữ">
+                        <HBox.margin>
+                            <Insets left="20.0"/>
+                        </HBox.margin>
+                    </RadioButton>
+                </HBox>
+                <Label text="Mã Lớp:" GridPane.rowIndex="6"/>
+                <HBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                    <ComboBox fx:id="comboBoxClassId" prefWidth="150.0"/>
+                    <CheckBox fx:id="checkBoxOff" mnemonicParsing="false" text="Nghỉ Học">
+                        <HBox.margin>
+                            <Insets left="20.0"/>
+                        </HBox.margin>
+                    </CheckBox>
+                </HBox>
+            </GridPane>
+            <Separator layoutX="21.0" layoutY="41.0">
+                <VBox.margin>
+                    <Insets top="20.0"/>
+                </VBox.margin>
+            </Separator>
+        </VBox>
+    </content>
+    <header>
+        <Label alignment="CENTER" graphicTextGap="0.0" styleClass="form-title" text="Student Form">
+            <font>
+                <Font name="System Bold" size="16.0"/>
+            </font>
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+            </padding>
+        </Label>
+    </header>
+    <ButtonType buttonData="OK_DONE" text="OK"/>
+    <ButtonType buttonData="CANCEL_CLOSE" text="Cancel"/>
+</DialogPane>

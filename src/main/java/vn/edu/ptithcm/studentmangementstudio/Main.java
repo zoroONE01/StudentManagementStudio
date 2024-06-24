@@ -4,23 +4,31 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import vn.edu.ptithcm.studentmangementstudio.core.K;
-import vn.edu.ptithcm.studentmangementstudio.core.helper.DBHelper;
+import vn.edu.ptithcm.studentmangementstudio.core.utils.AppLogger;
 import vn.edu.ptithcm.studentmangementstudio.core.utils.FxmlUtils;
-
-import java.sql.Connection;
+import vn.edu.ptithcm.studentmangementstudio.data.repository.Repositories;
+import vn.edu.ptithcm.studentmangementstudio.domain.usecase.auth.DisconnectDbUseCase;
+import vn.edu.ptithcm.studentmangementstudio.domain.usecase.auth.ConnectToServerAsRootUseCase;
 
 public class Main extends Application {
-    Connection connection;
 
-    @Override
-    public void init() throws Exception {
-        super.init();
-        DBHelper.getInstance().initialize(1430, "sa", "adminadmin");
-    }
+//    @Override
+//    public void init() throws Exception {
+//        super.init();
+//        var error = new ConnectToServerAsRootUseCase(Repositories.auth).call();
+//        if (error != null) {
+//            AppLogger.log(error.getMessage(), this.getClass().toString());
+//        } else {
+//            AppLogger.log("Connected to database", this.getClass().toString());
+//        }
+//    }
 
     @Override
     public void stop() throws Exception {
-        DBHelper.getInstance().close();
+        var error = new DisconnectDbUseCase(Repositories.auth).call();
+        if (error != null) {
+            AppLogger.log(error.getMessage(), this.getClass().toString());
+        }
         super.stop();
     }
 
