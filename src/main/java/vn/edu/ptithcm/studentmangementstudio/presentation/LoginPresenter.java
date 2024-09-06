@@ -14,6 +14,7 @@ import vn.edu.ptithcm.studentmangementstudio.domain.entity.LoginInfo;
 import vn.edu.ptithcm.studentmangementstudio.domain.entity.LoginInput;
 import vn.edu.ptithcm.studentmangementstudio.domain.entity.Result;
 import vn.edu.ptithcm.studentmangementstudio.domain.usecase.auth.*;
+import vn.edu.ptithcm.studentmangementstudio.presentation.admin.DashboardPresenter;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -46,17 +47,16 @@ public class LoginPresenter extends BasePresenter implements Initializable {
             var validateMessage = getValidateMessage(textFieldUsername, textFieldPassword, cbbDepartment);
             if (validateMessage != null) {
                 showAlertDialog(validateMessage);
-                return;
+                return null;
             }
-            setProgress(.1);
+            setProgress(.2);
 
             var disconnectError = new DisconnectDbUseCase(Repositories.auth).call();
             if (disconnectError != null) {
                 showAlertDialog(disconnectError);
-                return;
+                return null;
             }
-            setProgress(.3);
-
+            setProgress(.4);
 
             // connect to server
             var input = new LoginInput(textFieldUsername.getText(), textFieldPassword.getText(), cbbDepartment.getValue());
@@ -68,41 +68,46 @@ public class LoginPresenter extends BasePresenter implements Initializable {
             }
             if (connectError != null) {
                 showAlertDialog(connectError);
-                return;
+                return null;
             }
-            setProgress(.6);
-
+            setProgress(.7);
 
             // get user info
             Result<LoginInfo, Exception> result;
             if (checkBoxAdmin.isSelected()) {
                 result = new GetTeacherInfoUseCase(Repositories.auth, input.username()).call();
-
             } else {
                 result = new GetStudentInfoUseCase(Repositories.auth, input).call();
             }
             if (result.isError()) {
                 showAlertDialog(result.error());
-                return;
+                return null;
             }
             setProgress(1.0);
 
-            showAlertDialog(result.data().toString());
-
-            // TOTO: save user info to local storage
-//            Platform.runLater(() -> AppRouter.goTo(event, K.Routes.DASHBOARD_ADMIN));
+            if (checkBoxAdmin.isSelected()) {
+                Platform.runLater(() -> AppRouter.goTo(event, K.Routes.DASHBOARD, fxmlLoader -> {
+                    DashboardPresenter controller = fxmlLoader.getController();
+                    controller.setMenuBranch(input.department().departmentName());
+                    controller.setInfo(result.data());
+                }));
+            } else {
+                // TODO: go to student dashboard
+            }
+            return null;
         });
+
     }
 
     void initDepartment() {
         runAsTask(() -> {
             var result = new GetDepartmentUseCase(Repositories.auth).call();
             if (result.isError()) {
-                showAlertDialog(result.error());
-                return;
+                return result.error();
             }
             var departments = result.data();
             for (var department : departments) cbbDepartment.getItems().add(department);
+            return null;
         });
     }
 
@@ -111,11 +116,10 @@ public class LoginPresenter extends BasePresenter implements Initializable {
         super.initialize(url, resourceBundle);
         runAsTask(() -> {
             var error = new ConnectToServerAsRootUseCase(Repositories.auth).call();
-            if (error != null) {
-                AppLogger.log(error.toString(), this.getClass().toString());
-            } else {
+            if (error == null) {
                 initDepartment();
             }
+            return error;
         });
     }
 

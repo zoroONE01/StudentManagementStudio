@@ -4,7 +4,6 @@ import vn.edu.ptithcm.studentmangementstudio.data.repository.IAuthRepository;
 import vn.edu.ptithcm.studentmangementstudio.domain.entity.LoginInfo;
 import vn.edu.ptithcm.studentmangementstudio.domain.entity.LoginInput;
 import vn.edu.ptithcm.studentmangementstudio.domain.entity.Result;
-import vn.edu.ptithcm.studentmangementstudio.domain.entity.Student;
 import vn.edu.ptithcm.studentmangementstudio.domain.usecase.base.ResultUseCaseWithParams;
 
 public class GetStudentInfoUseCase extends ResultUseCaseWithParams<LoginInfo, LoginInput> {

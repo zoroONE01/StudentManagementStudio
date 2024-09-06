@@ -12,16 +12,16 @@ import vn.edu.ptithcm.studentmangementstudio.domain.usecase.auth.ConnectToServer
 
 public class Main extends Application {
 
-//    @Override
-//    public void init() throws Exception {
-//        super.init();
-//        var error = new ConnectToServerAsRootUseCase(Repositories.auth).call();
-//        if (error != null) {
-//            AppLogger.log(error.getMessage(), this.getClass().toString());
-//        } else {
-//            AppLogger.log("Connected to database", this.getClass().toString());
-//        }
-//    }
+/*    @Override
+    public void init() throws Exception {
+        super.init();
+        var error = new ConnectToServerAsRootUseCase(Repositories.auth).call();
+        if (error != null) {
+            AppLogger.log(error.getMessage(), this.getClass().toString());
+        } else {
+            AppLogger.log("Connected to database", this.getClass().toString());
+        }
+    }*/
 
     @Override
     public void stop() throws Exception {

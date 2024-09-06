@@ -62,7 +62,6 @@ public class SqlServerDataSource {
         return ps.executeQuery();
     }
 
-
     public void close() throws SQLException {
         if (isConnected()) {
             connection.close();
@@ -73,7 +72,6 @@ public class SqlServerDataSource {
     public static String getServer(String serverName) {
         return Resource.SERVER.get(serverName);
     }
-
 
     public static class Resource {
         public static final Map<String, String> SERVER = new HashMap<>() {

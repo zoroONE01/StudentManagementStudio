@@ -4,6 +4,8 @@ package vn.edu.ptithcm.studentmangementstudio.presentation;
 import javafx.application.Platform;
 import javafx.beans.property.*;
 import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -15,6 +17,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.Callable;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 abstract public class BasePresenter implements Initializable {
@@ -31,15 +36,15 @@ abstract public class BasePresenter implements Initializable {
     }
 
     protected void turnOnLoading() {
-        progress.set(0);
+        progress.set(0.1);
     }
 
     protected void turnOffLoading() {
-        progress.set(-1);
+        progress.set(0);
     }
 
     protected boolean isLoading() {
-        return progress.get() >= 0;
+        return progress.get() > 0;
     }
 
     protected void onProgressChange(Double progress) {
@@ -53,16 +58,20 @@ abstract public class BasePresenter implements Initializable {
         Platform.runLater(() -> AppDialog.showAlertDialog(message));
     }
 
-    protected void runAsTask(Runnable runnable) {
+    protected void runAsTask(Supplier<Exception> callable) {
         turnOnLoading();
-        var task = new Task<Void>() {
+        var task = new Task<Exception>() {
             @Override
-            protected Void call() {
-                runnable.run();
-                return null;
+            protected Exception call() {
+                return callable.get();
             }
         };
-        task.setOnSucceeded(workerStateEvent -> turnOffLoading());
+        task.setOnSucceeded(workerStateEvent -> {
+            turnOffLoading();
+            var exception = task.getValue();
+            if (exception == null) return;
+            showAlertDialog(exception);
+        });
         new Thread(task).start();
     }
 

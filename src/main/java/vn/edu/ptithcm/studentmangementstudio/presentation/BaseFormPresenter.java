@@ -4,14 +4,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
+import javafx.stage.Stage;
 import vn.edu.ptithcm.studentmangementstudio.Main;
 import vn.edu.ptithcm.studentmangementstudio.core.K;
 
 import java.io.IOException;
+import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 abstract public class BaseFormPresenter<T> extends BasePresenter {
     private final ButtonType CONFIRM = new ButtonType(K.Strings.CONFIRM, ButtonType.APPLY.getButtonData());
+    protected final Dialog<T> dialog = new Dialog<>();
+
 
     protected abstract String getPath();
 
@@ -30,7 +35,6 @@ abstract public class BaseFormPresenter<T> extends BasePresenter {
 
         // Create the dialog
         DialogPane pane = loader.load();
-        var dialog = new Dialog<T>();
         dialog.setDialogPane(pane);
         BaseFormPresenter<T> controller = loader.getController();
         var type = dialog.showAndWait();
@@ -42,17 +46,18 @@ abstract public class BaseFormPresenter<T> extends BasePresenter {
         }
     }
 
-    public T show(Function<FXMLLoader, BaseFormPresenter<T>> presenterBuilder) throws IOException {
+    public T show(Consumer<FXMLLoader> presenterBuilder) throws IOException {
 
         // Load the FXML file
         var loader = new FXMLLoader(Main.class.getResource(getPath()));
 
         // Create the dialog
         DialogPane pane = loader.load();
-        var dialog = new Dialog<>();
+        presenterBuilder.accept(loader);
+
         dialog.setDialogPane(pane);
-        var controller = presenterBuilder.apply(loader);
         var type = dialog.showAndWait();
+        BaseFormPresenter<T> controller = loader.getController();
         if (type.isPresent() && type.get() == CONFIRM) {
             return controller.onSave();
         } else {

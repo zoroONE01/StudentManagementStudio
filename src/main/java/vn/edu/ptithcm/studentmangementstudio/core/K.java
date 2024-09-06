@@ -4,25 +4,29 @@ public class K {
 
 
     public static class DbFields {
-        public static final String ID = "id";
-        public static final String LASTNAME = "lastname";
-        public static final String FIRSTNAME = "firstname";
-        public static final String ADDRESS = "address";
-        public static final String BIRTH = "birth";
-        public static final String GENDER = "gender";
-        public static final String CLASS_ID = "classId";
-        public static final String IS_OFF = "isOff";
+        public static final String LASTNAME = "HO";
+        public static final String FIRSTNAME = "TEN";
+        public static final String ADDRESS = "DIACHI";
+        public static final String BIRTH = "NGAYSINH";
+        public static final String GENDER = "PHAI";
+        public static final String CLASS_ID = "MALOP";
+        public static final String IS_OFF = "DANGHIHOC";
+        public static final String PASSWORD = "PASSWORD";
         public static final String DEPARTMENT_NAME = "TENKHOA";
         public static final String SERVER_NAME = "TENSERVER";
         public static final String STUDENT_ID = "MASV";
         public static final String TEACHER_ID = "MAGV";
         public static final String FULL_NAME = "HOTEN";
         public static final String GROUP_NAME = "TENNHOM";
+        public static final String CLASS_NAME = "TENLOP";
+        public static final String CLASS_YEAR = "KHOAHOC";
+        public static final String DEPARTMENT_ID = "MAKHOA";
+
     }
 
     public static class Routes {
         static public final String LOGIN = "fxml/login-view.fxml";
-        static public final String DASHBOARD_ADMIN = "fxml/dashboard-view.fxml";
+        static public final String DASHBOARD = "fxml/dashboard-view.fxml";
         static public final String CLASSROOM_FORM = "fxml/classroom-form-view.fxml";
         static public final String STUDENT_FORM = "fxml/student-form-view.fxml";
     }
@@ -44,6 +48,7 @@ public class K {
         public static final String NOT_FOUND_USER = "Không tìm thấy người dùng.";
         public static final String DO_NOT_LEAVE_BLANK = " không được để trống.";
         public static final String ACCOUNT_OR_PASSWORD_INCORRECT = "Tài Khoản hoặc Mật Khẩu không chính xác.";
+        public static final String NOT_FOUND_DATA = "Không tìm thấy dữ liệu.";
     }
 
     public static class Pattern {

@@ -9,10 +9,13 @@ import vn.edu.ptithcm.studentmangementstudio.Main;
 import vn.edu.ptithcm.studentmangementstudio.core.utils.AppLogger;
 import vn.edu.ptithcm.studentmangementstudio.core.utils.FxUtils;
 import vn.edu.ptithcm.studentmangementstudio.core.utils.FxmlUtils;
+import vn.edu.ptithcm.studentmangementstudio.domain.entity.LoginInfo;
 import vn.edu.ptithcm.studentmangementstudio.domain.entity.Size;
 import vn.edu.ptithcm.studentmangementstudio.presentation.BasePresenter;
+import vn.edu.ptithcm.studentmangementstudio.presentation.admin.DashboardPresenter;
 
 import java.io.IOException;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 
@@ -46,15 +49,15 @@ public class AppRouter {
         goTo(FxUtils.getStageFromEvent(event), route, size);
     }
 
-    public static void goTo(Stage stage, String route, Function<FXMLLoader, BasePresenter> presenterBuilder) {
+    public static void goTo(Stage stage, String route, Consumer<FXMLLoader> presenterBuilder) {
         try {
             stage.close();
             var fxmlLoader = new FXMLLoader(Main.class.getResource(route));
+            Parent root = fxmlLoader.load();
 
             // handler controller before navigate
-            var viewController = presenterBuilder.apply(fxmlLoader);
+            presenterBuilder.accept(fxmlLoader);
 
-            Parent root = (Parent) fxmlLoader.load();
             var scene = new Scene(root, 1200, 800);
             stage.setScene(scene);
             stage.show();
@@ -64,19 +67,19 @@ public class AppRouter {
         }
     }
 
-    public static void goTo(ActionEvent event, String route, Function<FXMLLoader, BasePresenter> presenterBuilder) {
+    public static void goTo(ActionEvent event, String route, Consumer<FXMLLoader> presenterBuilder) {
         goTo(FxUtils.getStageFromEvent(event), route, presenterBuilder);
     }
 
-    public static void goTo(Stage stage, String route, Size size, Function<FXMLLoader, BasePresenter> presenterBuilder) {
+    public static void goTo(Stage stage, String route, Size size, Consumer<FXMLLoader> presenterBuilder) {
         try {
             stage.close();
             var fxmlLoader = new FXMLLoader(Main.class.getResource(route));
+            Parent root = fxmlLoader.load();
 
             // handler controller before navigate
-            var viewController = presenterBuilder.apply(fxmlLoader);
+            presenterBuilder.accept(fxmlLoader);
 
-            var root = (Parent) fxmlLoader.load();
             var scene = new Scene(root, size.width(), size.height());
             stage.setScene(scene);
             stage.show();
@@ -86,7 +89,7 @@ public class AppRouter {
         }
     }
 
-    public static void goTo(ActionEvent event, String route, Size size, Function<FXMLLoader, BasePresenter> presenterBuilder) {
+    public static void goTo(ActionEvent event, String route, Size size, Consumer<FXMLLoader> presenterBuilder) {
         goTo(FxUtils.getStageFromEvent(event), route, size, presenterBuilder);
     }
 

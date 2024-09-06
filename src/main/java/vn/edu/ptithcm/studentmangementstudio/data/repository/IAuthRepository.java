@@ -35,8 +35,8 @@ public class IAuthRepository extends AuthRepository {
             if (resultSet.first()) {
                 var id = resultSet.getString(K.DbFields.TEACHER_ID);
                 var fullName = resultSet.getString(K.DbFields.FULL_NAME);
-                var group = resultSet.getString(K.DbFields.GROUP_NAME);
-                return Result.success(new LoginInfo(id, fullName, group));
+                var groupName = resultSet.getString(K.DbFields.GROUP_NAME);
+                return Result.success(LoginInfo.of(id, fullName, groupName));
             }
             return Result.error(new RuntimeException(K.Strings.NOT_FOUND_USER));
         } catch (SQLException e) {
@@ -51,8 +51,8 @@ public class IAuthRepository extends AuthRepository {
             if (resultSet.first()) {
                 var id = resultSet.getString(K.DbFields.STUDENT_ID);
                 var fullName = resultSet.getString(K.DbFields.FULL_NAME);
-                var group = resultSet.getString(K.DbFields.GROUP_NAME);
-                return Result.success(new LoginInfo(id, fullName, group));
+                var groupName = resultSet.getString(K.DbFields.GROUP_NAME);
+                return Result.success(LoginInfo.of(id, fullName, groupName));
             }
             return Result.error(new RuntimeException(K.Strings.NOT_FOUND_USER));
         } catch (SQLException e) {
